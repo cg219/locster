@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    working_dir: /app
+    command: /bin/bash -c -l ./build.dev.sh
+    environment:
+      - PORT=8195
+    env_file:
+      - .env
+    ports:
+      - 8080:8195
+    develop:
+      watch:
+        - action: rebuild
+          path: ./**/*.go
+        - action: rebuild
+          path: ./go.mod
+        - action: rebuild
+          path: ./go.sum
+        - action: sync+restart
+          path: .
+          target: /app
+          ignore:
+            # - ./frontend/node_modules
+            - ./frontend
+            - ./static-app
+            - ./data
+    volumes:
+      - $PWD/data:/app/data
+      - $PWD/static-app:/app/static-app

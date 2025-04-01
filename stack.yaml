@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  app:
+    image: ghcr.io/cg219/locster:main
+    environment:
+      - APP_DATA=data/database.db
+      - APP=/run/secrets/appsecrets
+      - PORT=8080
+    ports:
+      - 8080:8080
+    volumes:
+      - locster-data:/app/data
+    secrets:
+      - appsecrets
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/healthcheck"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+secrets:
+  appsecrets:
+    file: secrets.yml
+
+volumes:
+  locster-data:
+
