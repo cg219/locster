@@ -23,7 +23,7 @@ services:
 
 secrets:
   appsecrets:
-    file: secrets.yml
+    file: secrets.yaml
 
 volumes:
   locster-data:
