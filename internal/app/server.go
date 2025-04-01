@@ -84,7 +84,7 @@ func addRoutes(srv *Server) {
     srv.mux.Handle("POST /api/forgot-password", srv.handle(srv.ForgotPassword))
     srv.mux.Handle("POST /api/reset-password", srv.handle(srv.ResetPassword))
     srv.mux.Handle("POST /api/report", srv.handle(srv.UserOnly, srv.ReportBug))
-    srv.mux.Handle("POST /auth/register", srv.handle(srv.Register))
+    // srv.mux.Handle("POST /auth/register", srv.handle(srv.Register))
     srv.mux.Handle("POST /auth/login", srv.handle(srv.Login))
     srv.mux.Handle("POST /auth/logout", srv.handle(srv.UserOnly, srv.Logout))
     srv.mux.Handle("GET /validate/{validvalue}", srv.handle(srv.ValidateRegistration)) 
