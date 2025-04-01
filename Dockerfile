@@ -8,7 +8,7 @@ WORKDIR /build
 COPY go.* ./
 RUN go mod download
 COPY . .
-# RUN cd frontend && /root/.deno/bin/deno install && /root/.deno/bin/deno task build && cd ..
+RUN cd frontend && /root/.deno/bin/deno install && /root/.deno/bin/deno task build && cd ..
 RUN go build -o /build/locster main.go
 RUN chmod +x /build/locster
 
@@ -28,6 +28,7 @@ EXPOSE 8080
 FROM alpine:latest AS production
 WORKDIR /app
 COPY --from=build /build/locster /app
+COPY --from=build /build/static-app /app
 EXPOSE 8080
 ENTRYPOINT [ "/app/locster" ]
 
