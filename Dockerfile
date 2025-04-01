@@ -3,7 +3,7 @@ ENV CGO_ENABLED=0
 ENV GOOS=linux
 ENV GOARCH=amd64
 RUN apt-get update && apt-get install -y gcc libc-dev unzip
-# RUN curl -fsSL https://deno.land/install.sh | sh
+RUN curl -fsSL https://deno.land/install.sh | sh
 WORKDIR /build
 COPY go.* ./
 RUN go mod download
