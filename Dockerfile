@@ -28,7 +28,7 @@ EXPOSE 8080
 FROM alpine:latest AS production
 WORKDIR /app
 COPY --from=build /build/locster /app
-COPY --from=build /build/static-app /app
+COPY --from=build /build/static-app /app/static-app
 EXPOSE 8080
 ENTRYPOINT [ "/app/locster" ]
 
