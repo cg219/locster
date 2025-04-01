@@ -5,6 +5,7 @@
 static-app
 **node_modules
 secrets.yml
+secrets.yaml
 tmp
 data
 

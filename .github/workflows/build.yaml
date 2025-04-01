@@ -64,4 +64,8 @@ jobs:
           tags: tag:ci
       - name: Connect and Update
         run: |
-          ssh -o "StrictHostKeyChecking no" ${{ secrets.USER }}@${{ secrets.HOST }} ""
+          ssh -o "StrictHostKeyChecking no" ${{ secrets.USER }}@${{ secrets.HOST }} "
+            cd projects/locster
+            docker compose -f stack.yaml pull
+            docker stack deploy -c stack.yaml locster
+          "
